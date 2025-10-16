@@ -1,5 +1,5 @@
 async function load() {
-    let modelKeywordParts = (await readFile(`tmp/modelKeywordPath.txt`)).split(",")
+    let modelKeywordParts = (await readFile(`/content/refo/tmp/modelKeywordPath.txt`)).split(",")
     modelKeywordPath = modelKeywordParts[0];
     let customFileExists = modelKeywordParts[1] === "True";
 
