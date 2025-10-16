@@ -1658,7 +1658,8 @@ onUiUpdate(async () => {
     if (TAC_CFG) return;
     tacLoading = true;
     // Get our tag base path from the temp file
-    tagBasePath = await readFile(`../../tmp/tagAutocompletePath.txt`);
+    let tmpPath = new URL('../../tmp/tagAutocompletePath.txt', window.location.origin).href;
+    tagBasePath = await readFile(tmpPath);
     // Load config from webui opts
     await syncOptions();
     // Rest of setup
