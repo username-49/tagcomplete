@@ -81,26 +81,12 @@ def find_ext_wildcard_paths():
 WILDCARD_EXT_PATHS = find_ext_wildcard_paths()
 
 # The path to the temporary files
-# FIXED: Try to use webui root tmp, but fallback to extension folder if it fails
+# In the webui root, on windows it exists by default, on linux it doesn't
+STATIC_TEMP_PATH = FILE_DIR.joinpath("tmp").absolute()
 TEMP_PATH = TAGS_PATH.joinpath("temp").absolute()  # Extension specific temp files
-
-# Try to create/use tmp in webui root, but handle permission errors gracefully
-try:
-    STATIC_TEMP_PATH = FILE_DIR.joinpath("tmp").absolute()
-    # Test if we can actually write to this location
-    if not STATIC_TEMP_PATH.exists():
-        STATIC_TEMP_PATH.mkdir(parents=True, exist_ok=True)
-    # Test write permission
-    test_file = STATIC_TEMP_PATH.joinpath(".tac_write_test")
-    test_file.touch()
-    test_file.unlink()
-except (PermissionError, OSError) as e:
-    # If we can't write to webui root tmp, use extension folder instead
-    print(f"Tag Autocomplete: Cannot write to {FILE_DIR.joinpath('tmp')}, using extension folder instead. Error: {e}")
-    STATIC_TEMP_PATH = TAGS_PATH.joinpath("static_temp").absolute()
 
 # Make sure these folders exist
 if not TEMP_PATH.exists():
-    TEMP_PATH.mkdir(parents=True, exist_ok=True)
+    TEMP_PATH.mkdir()
 if not STATIC_TEMP_PATH.exists():
-    STATIC_TEMP_PATH.mkdir(parents=True, exist_ok=True)
+    STATIC_TEMP_PATH.mkdir()
