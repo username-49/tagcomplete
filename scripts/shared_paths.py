@@ -85,6 +85,10 @@ WILDCARD_EXT_PATHS = find_ext_wildcard_paths()
 STATIC_TEMP_PATH = FILE_DIR.joinpath("tmp").absolute()
 TEMP_PATH = TAGS_PATH.joinpath("temp").absolute()  # Extension specific temp files
 
+
+print(f"[DEBUG] STATIC_TEMP_PATH = {STATIC_TEMP_PATH}")
+print(f"[DEBUG] TEMP_PATH = {TEMP_PATH}"
+
 # Make sure these folders exist
 if not TEMP_PATH.exists():
     TEMP_PATH.mkdir()
