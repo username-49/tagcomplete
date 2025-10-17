@@ -1,4 +1,4 @@
-﻿const styleColors = {
+const styleColors = {
     "--results-neutral-text": ["#e0e0e0","black"],
     "--results-bg": ["#0b0f19", "#ffffff"],
     "--results-border-color": ["#4b5563", "#e5e7eb"],
@@ -1658,8 +1658,7 @@ onUiUpdate(async () => {
     if (TAC_CFG) return;
     tacLoading = true;
     // Get our tag base path from the temp file
-    let tmpPath = new URL('../../tmp/tagAutocompletePath.txt', window.location.origin).href;
-    tagBasePath = await readFile(tmpPath);
+    tagBasePath = await readFile(`/content/webui/tmp/tagAutocompletePath.txt`);
     // Load config from webui opts
     await syncOptions();
     // Rest of setup
